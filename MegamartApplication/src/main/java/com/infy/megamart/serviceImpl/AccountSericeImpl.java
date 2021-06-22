@@ -1,5 +1,8 @@
 package com.infy.megamart.serviceImpl;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +13,10 @@ import com.infy.megamart.dao.AccountRepository;
 import com.infy.megamart.data.Account;
 import com.infy.megamart.service.AccountService;
 
+
 @Service
-public class AccountSericeImpl  implements AccountService{
-	
+public class AccountSericeImpl implements AccountService {
+
 	@Autowired
 	AccountRepository accountRepository;
 
@@ -20,18 +24,16 @@ public class AccountSericeImpl  implements AccountService{
 	public Status registerAccount(Account newAccount) {
 		
 		
-		Account accounts=accountRepository.getById(newAccount.getUsername());
-	
-		
-		
-	            if (accounts.getUsername().equals(newAccount.getUsername())) {
-	                System.out.println("User Already exists!");
+		 List<Account> accounts = accountRepository.findAll();
+
+	        for (Account account : accounts) {
+	            if (account.equals(newAccount)) {
+	                System.out.println("Account Already exists!");
 	                return Status.USER_ALREADY_EXISTS;
 	            }
-	        
+	        }
 
-	            accountRepository.save(newAccount);
+	        accountRepository.save(newAccount);
 	        return Status.SUCCESS;
 	}
-
 }
