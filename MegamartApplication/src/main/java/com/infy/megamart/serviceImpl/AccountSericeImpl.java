@@ -27,7 +27,7 @@ public class AccountSericeImpl implements AccountService {
 		 List<Account> accounts = accountRepository.findAll();
 
 	        for (Account account : accounts) {
-	            if (account.equals(newAccount)) {
+	            if (account.getUsername().equals(newAccount.getUsername())) {
 	                System.out.println("Account Already exists!");
 	                return Status.USER_ALREADY_EXISTS;
 	            }
