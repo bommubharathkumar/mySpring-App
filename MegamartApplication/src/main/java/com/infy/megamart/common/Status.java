@@ -6,4 +6,4 @@ public enum Status {
     FAILURE,
     USERNAME_OR_PASSWORD_INCORRECT,
     PRODUCT_ALREADY_EXISTS
-}
+} 
